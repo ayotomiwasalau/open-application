@@ -1,0 +1,93 @@
+{{- if .Values.database.enabled }}
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: postgres-volume
+  labels:
+    type: local
+    app: app-db
+  namespace: {{ .Values.namespace.name }}
+spec:
+  storageClassName: manual
+  capacity:
+    storage: {{ .Values.database.storage.capacity }}
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: {{ .Values.database.storage.hostPath }}
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-pv-claim
+  labels:
+    app: app-db
+  namespace: {{ .Values.namespace.name }}
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.database.storage.capacity }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-db
+  labels:
+    app: app-db
+  namespace: {{ .Values.namespace.name }}
+spec:
+  type: NodePort
+  selector:
+    app: app-db
+  ports:
+   - port: {{ .Values.database.port }}
+     targetPort: {{ .Values.database.port }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-db
+  namespace: {{ .Values.namespace.name }}
+spec:
+  replicas: {{ .Values.database.replicaCount }}
+  selector:
+    matchLabels:
+      app: app-db
+  template:
+    metadata:
+      labels:
+        app: app-db
+    spec:
+      containers:
+        - name: app-db
+          image: {{ .Values.database.image.repository }}:{{ .Values.database.image.tag }}
+          imagePullPolicy: {{ .Values.database.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.database.port }}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgresdb
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: db-env
+                  key: DB_USERNAME
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secret
+                  key: DB_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: db-env
+                  key: DB_NAME
+      volumes:
+        - name: postgresdb
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim   
+{{- end }}

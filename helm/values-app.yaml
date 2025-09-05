@@ -1,0 +1,57 @@
+namespace:
+  name: dev
+
+app:
+  enabled: true
+
+database:
+  enabled: false
+
+service:
+  port: 3112
+  targetPort: 3112
+  protocol: TCP
+  type: NodePort
+
+image:
+  repository: tomiwasalau01/tommyjumper
+  tag: latest
+  pullPolicy: Always
+
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 64Mi
+  limits:
+    memory: "128Mi"
+    cpu: "500m"
+
+ports:
+  containerPort: 3112
+  protocol: TCP
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 3112
+  initialDelaySeconds: 5
+  timeoutSeconds: 2
+
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: 3112
+  initialDelaySeconds: 5
+  timeoutSeconds: 5
+
+database:
+  config:
+    username: "postgres"
+    name: "postgres"
+    host: "app-db"
+    port: "5432"
+  secret:
+    password: "cGFzc3dvcmQ="
+

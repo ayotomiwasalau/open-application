@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}TommyJumper - Leaderboard{% endblock %}
+
+{% block content %}
+<div class="leaderboard-container">
+    <h1>🏆 Leaderboard</h1>
+    
+    {% if scores %}
+        <div class="leaderboard-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Player</th>
+                        <th>Score</th>
+                        <th>Level</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for score in scores %}
+                    <tr class="{% if loop.index == 1 %}gold{% elif loop.index == 2 %}silver{% elif loop.index == 3 %}bronze{% endif %}">
+                        <td>{{ loop.index }}</td>
+                        <td>{{ score.player_name }}</td>
+                        <td>{{ score.score }}</td>
+                        <td>{{ score.level }}</td>
+                        <td>{{ score.game_duration }}s</td>
+                        <td>{{ (score.created.replace('T',' ')[:16]) if score.created else 'N/A' }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="no-scores">
+            <p>No scores yet! Be the first to play and set a high score!</p>
+            <a href="{{ url_for('index') }}" class="play-button">Play Now</a>
+        </div>
+    {% endif %}
+    
+    <div class="leaderboard-actions">
+        <a href="{{ url_for('index') }}" class="play-button">Play Game</a>
+        <button onclick="refreshLeaderboard()" class="refresh-button">Refresh</button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/leaderboard.js') }}"></script>
+{% endblock %}

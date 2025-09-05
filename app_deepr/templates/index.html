@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Rant your rantz{% endblock %}</h1>
+    {% for post in posts %}
+        <a class="post" href="{{ url_for('post', post_id=post['id']) }}">
+            <h2>{{ post['title'] }}</h2>
+        </a>
+        <div class="post-meta">
+            <span class="author">By {{ post['name'] }}</span>
+            <span class="timestamp">{{ post['created'] }}</span>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}TommyJumper - Play Game{% endblock %}
+
+{% block content %}
+<div class="game-container">
+    <div class="game-header">
+        <h1>TommyJumper</h1>
+        <div class="game-stats">
+            <div class="stat">
+                <span class="label">Score:</span>
+                <span id="score">0</span>
+            </div>
+            <div class="stat">
+                <span class="label">Level:</span>
+                <span id="level">1</span>
+            </div>
+            <div class="stat">
+                <span class="label">Time:</span>
+                <span id="time">0s</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="game-area">
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+        <!-- In-play controls (visible while game is running) -->
+        <div id="playControls" class="play-controls" style="display:none">
+            <button id="btnPause" class="control-action" aria-label="Pause">Pause</button>
+            <button id="btnEnd" class="control-action" aria-label="End Game">End</button>
+        </div>
+        <div id="gameOver" class="game-over hidden">
+            <h2>Game Over!</h2>
+            <p>Your Score: <span id="finalScore">0</span></p>
+            <p>Level Reached: <span id="finalLevel">1</span></p>
+            <p>Time Played: <span id="finalTime">0s</span></p>
+            <div class="score-form">
+                <input type="text" id="playerName" placeholder="Enter your name" maxlength="20">
+                <button id="submitScore">Submit Score</button>
+            </div>
+            <button id="restartGame">Play Again</button>
+            <a href="{{ url_for('leaderboard') }}" class="play-button" id="checkLeaderboard">Check Leaderboard</a>
+            <a href="{{ url_for('index') }}" class="play-button" id="endGame">End Game</a>
+        </div>
+        <div id="startScreen" class="start-screen">
+            <h2>TommyJumper</h2>
+            <p>Use A/D or ←/→ to move</p>
+            <p>Jump on platforms to climb higher!</p>
+            <button id="startGame">Start Game</button>
+        </div>
+    </div>
+
+    <!-- On‑screen controls for mobile -->
+    <div class="mobile-controls" aria-label="Mobile controls">
+        <button id="btnLeft" class="control-btn" aria-label="Move Left">◀</button>
+        <button id="btnShoot" class="control-btn shoot" aria-label="Shoot">●</button>
+        <button id="btnRight" class="control-btn" aria-label="Move Right">▶</button>
+    </div>
+    
+    <div class="game-controls">
+        <p><strong>Controls:</strong></p>
+        <p>A/D or ←/→ - Move left/right</p>
+        <p>Space - Jump (optional)</p>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

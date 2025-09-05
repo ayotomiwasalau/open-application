@@ -1,0 +1,40 @@
+## Docker commands used to build the application 
+docker build -t speak-appserver .
+docker build -t speak-db .
+
+
+docker run -e DB_USERNAME=<DB_USERNAME> -e DB_PASSWORD=<DB_PASSWORD> -p 5151:5151 <CONTAINER_NAME>
+
+- docker build -t tomiwasalau01/appserver .
+
+docker build --build-arg DB_USERNAME=tomdb --build-arg DB_PASSWORD=tompassword  -t tomiwasalau01/appserver .
+
+docker run -e DB_USERNAME=tomdb -e DB_PASSWORD=tompassword -p 3111:3111 speak-appserver
+
+----------------
+docker build -t tomiwasalau01/app-db .
+
+
+docker build --build-arg DB_USERNAME=tomdb --build-arg DB_PASSWORD=tompassword  -t speak-db .
+
+docker build --platform linux/amd64 -t tomiwasalau01/app-db .
+
+docker run -e DB_USERNAME=tomdb -e DB_PASSWORD=tompassword -p 5151:5151 speak-db
+
+
+## Docker commands used to run the application
+docker run -d -p 7111:3111 techtrends
+docker images
+
+## Docker commands used to get the application logs
+docker ps
+
+## Logs from the container running the TechTrends application
+# TODO: paste logs from the Docker container 
+docker logs -f bd45147fb399
+
+# Add tags
+docker tag techtrends:v1.0.0 tomiwasalau01/techtrends:v.1.0.0
+
+# Push to dockerhub
+docker push tomiwasalau01/techtrends:v.1.0.0

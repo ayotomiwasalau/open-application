@@ -1,0 +1,9 @@
+apiVersion: v1
+name: game-app 
+description: Deploy a python game app
+keywords:
+- game-app
+version: 1.0.0
+maintainers:
+- name: ayotomiwasalau 
+  email: ayotomiwasalau@gmail.com

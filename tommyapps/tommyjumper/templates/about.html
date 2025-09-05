@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}TommyJumper - About{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <h1>About TommyJumper</h1>
+    
+    <div class="about-content">
+        <div class="about-section">
+            <h2>🎮 How to Play</h2>
+            <p>TommyJumper is an endless jumping game where you control a character that must jump on platforms to climb higher and higher. The goal is to achieve the highest score possible!</p>
+            
+            <h3>Controls:</h3>
+            <ul>
+                <li><strong>A/D</strong> or <strong>←/→</strong> - Move left and right</li>
+                <li><strong>Space</strong> - Jump (optional)</li>
+            </ul>
+            
+            <h3>Game Features:</h3>
+            <ul>
+                <li>🟦 <strong>Blue Platforms</strong> - Regular platforms to jump on</li>
+                <li>🟧 <strong>Orange Platforms</strong> - Moving platforms that slide back and forth</li>
+                <li>🔴 <strong>Red Enemies</strong> - Avoid these enemies or you'll lose!</li>
+                <li>📈 <strong>Progressive Difficulty</strong> - Game gets harder as you level up</li>
+                <li>🏆 <strong>Leaderboard</strong> - Compete with other players for high scores</li>
+            </ul>
+        </div>
+        
+        <div class="about-section">
+            <h2>🎯 Scoring System</h2>
+            <p>Your score increases based on how high you climb. The higher you go, the more points you earn!</p>
+            <ul>
+                <li>Score increases as you climb higher</li>
+                <li>Level up every 1000 points</li>
+                <li>Gravity increases with each level, making the game more challenging</li>
+                <li>Your best scores are saved to the leaderboard</li>
+            </ul>
+        </div>
+        
+        <div class="about-section">
+            <h2>🚀 Tips & Strategies</h2>
+            <ul>
+                <li>Plan your jumps ahead - look for the best platform to land on</li>
+                <li>Use the screen wrapping to your advantage - you can move off one side and appear on the other</li>
+                <li>Be careful with moving platforms - they can be tricky to land on</li>
+                <li>Avoid enemies at all costs - they will end your game immediately</li>
+                <li>Try to stay in the center of the screen when possible for better platform visibility</li>
+            </ul>
+        </div>
+        
+        <div class="about-section">
+            <h2>💾 Technical Details</h2>
+            <p>This TommyJumper game is built with:</p>
+            <ul>
+                <li><strong>Backend:</strong> Flask (Python web framework)</li>
+                <li><strong>Frontend:</strong> HTML5 Canvas, JavaScript</li>
+                <li><strong>Database:</strong> PostgreSQL for score storage</li>
+                <li><strong>Observability:</strong> OpenTelemetry for monitoring</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="about-actions">
+        <a href="{{ url_for('index') }}" class="play-button">Start Playing</a>
+        <a href="{{ url_for('leaderboard') }}" class="leaderboard-button">View Leaderboard</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS scores;
+
+CREATE TABLE scores (
+    id SERIAL PRIMARY KEY,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    player_name VARCHAR(100) NOT NULL,
+    score INTEGER NOT NULL,
+    level INTEGER NOT NULL,
+    game_duration INTEGER NOT NULL
+);

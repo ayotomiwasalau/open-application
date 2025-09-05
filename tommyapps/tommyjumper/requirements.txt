@@ -1,0 +1,6 @@
+Flask
+werkzeug
+itsdangerous
+pytest
+Flask-SQLAlchemy
+psycopg2-binary
