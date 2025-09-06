@@ -1,9 +1,6 @@
 namespace:
   name: dev
 
-app:
-  enabled: false
-
 database:
   enabled: true
   replicaCount: 1
@@ -20,6 +17,5 @@ database:
     name: "postgres"
     host: "app-db"
     port: "5432"
-  secret:
-    password: "cGFzc3dvcmQ="
+
 

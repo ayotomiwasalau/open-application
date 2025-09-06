@@ -1,4 +1,3 @@
-{{- if .Values.database.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -9,4 +8,3 @@ data:
   DB_NAME: {{ .Values.database.config.name | quote }}
   DB_HOST: {{ .Values.database.config.host | quote }}
   DB_PORT: {{ .Values.database.config.port | quote }} 
-{{- end }}

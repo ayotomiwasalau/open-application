@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: tommyjumper-app-prod
+  name: tommyapps
   namespace: argocd
 spec:
   destination:
@@ -12,6 +12,7 @@ spec:
     helm:
       valueFiles:
         - values-app.yaml
+        - values-db.yaml
     # path to the folder with the YAML manifests
     path: helm
     repoURL: https://github.com/ayotomiwasalau/open-application

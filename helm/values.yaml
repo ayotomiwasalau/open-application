@@ -1,9 +1,7 @@
 namespace:
   name: dev
 
-# App values (tommyjumper)
-app:
-  enabled: true
+# Tommyjumper app values
 service:
   port: 3112
   targetPort: 3112
@@ -60,5 +58,4 @@ database:
     name: "postgres"
     host: "app-db"
     port: "5432"
-  secret:
-    password: "cGFzc3dvcmQ="
+

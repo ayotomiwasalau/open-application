@@ -1,13 +1,12 @@
-{{- if .Values.app.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-server
+  name: tommy-jumper-server
   namespace: {{ .Values.namespace.name }}
 spec:
   type: NodePort
   selector:
-    app: app-server
+    app: tommy-jumper-server
   ports:
   - name: "http"
     protocol: TCP
@@ -19,14 +18,14 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: app-server
-  name: app-server
+    app: tommy-jumper-server
+  name: tommy-jumper-server
   namespace: {{ .Values.namespace.name }} 
 spec:
   replicas: {{ .Values.replicaCount }} 
   selector:
     matchLabels:
-      app: app-server
+      app: tommy-jumper-server
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -36,11 +35,11 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: app-server
+        app: tommy-jumper-server
     spec:
       containers:
       - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-        name: app-server
+        name: tommy-jumper-server
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.ports.containerPort }}
@@ -83,22 +82,6 @@ spec:
             configMapKeyRef:
               name: db-env
               key: DB_NAME
-        # OpenTelemetry environment variables for tracing
-        - name: OTEL_SERVICE_NAME
-          value: "rantzapp"
-        - name: OTEL_SERVICE_VERSION
-          value: "1.0.0"
-        - name: OTEL_RESOURCE_ATTRIBUTES
-          value: "service.name=rantzapp,service.version=1.0.0"
-        - name: OTEL_EXPORTER_OTLP_ENDPOINT
-          value: "http://otel-collector-opentelemetry-collector.observability.svc.cluster.local:4317"
-        - name: OTEL_EXPORTER_OTLP_PROTOCOL
-          value: "grpc"
-        - name: OTEL_TRACES_SAMPLER
-          value: "always_on"
-        - name: OTEL_TRACES_SAMPLER_ARG
-          value: "1.0"
-              
         resources:
           requests:
             memory: {{ .Values.resources.requests.memory }}
@@ -108,4 +91,3 @@ spec:
             memory: {{ .Values.resources.limits.memory }}
             cpu: {{ .Values.resources.limits.cpu }}
       restartPolicy: Always   
-{{- end }}

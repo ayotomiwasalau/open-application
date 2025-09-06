@@ -1,12 +1,6 @@
 namespace:
   name: dev
 
-app:
-  enabled: true
-
-database:
-  enabled: false
-
 service:
   port: 3112
   targetPort: 3112
@@ -52,6 +46,5 @@ database:
     name: "postgres"
     host: "app-db"
     port: "5432"
-  secret:
-    password: "cGFzc3dvcmQ="
+
 
