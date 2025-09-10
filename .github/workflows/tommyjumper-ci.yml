@@ -5,12 +5,12 @@ on:
     branches: [ main, master ]
     paths:
       - 'tommyapps/tommyjumper/**'
-      - '.github/workflows/tommyapps-ci.yml'
+      - '.github/workflows/tommyjumper-ci.yml'
   workflow_dispatch:
 
 env:
   IMAGE_NAME: tomiwasalau01/tommyjumper
-  APP_NAME: tommyapps
+  APP_NAME: tommyjumper
   ARGOCD_NAMESPACE: argocd
   KUBECONFIG: kubeconfig
 
