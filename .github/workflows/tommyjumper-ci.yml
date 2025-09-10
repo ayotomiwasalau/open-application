@@ -70,7 +70,6 @@ jobs:
         run: |
           kubectl create namespace $APP_NAMESPACE || true
 
-
       - name: Apply Argo CD Application
         run: |
           kubectl apply -f ./helm/argocd/helm_app.yaml
