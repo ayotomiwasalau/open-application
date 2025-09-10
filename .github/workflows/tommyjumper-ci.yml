@@ -13,9 +13,10 @@ env:
   APP_NAME: tommyapps
   ARGOCD_NAMESPACE: argocd
   KUBECONFIG: kubeconfig
+  APP_NAMESPACE: dev
 
 jobs:
-  build-and-push:
+  build-and-push: 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -57,6 +58,18 @@ jobs:
       - name: Configure kubectl
         run: |
           echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $KUBECONFIG
+
+      - name: Check Argo CD installation
+        run: |
+          if ! kubectl get namespace $ARGOCD_NAMESPACE &> /dev/null; then
+            echo "ERROR: Argo CD namespace not found. Please install Argo CD first."
+            exit 1
+          fi
+
+      - name: Create namespace if not exists
+        run: |
+          kubectl create namespace $APP_NAMESPACE || true
+
 
       - name: Apply Argo CD Application
         run: |
