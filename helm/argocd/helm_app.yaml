@@ -11,8 +11,7 @@ spec:
   source:
     helm:
       valueFiles:
-        - values-app.yaml
-        - values-db.yaml
+        - values-main.yaml
     # path to the folder with the YAML manifests
     path: helm
     repoURL: https://github.com/ayotomiwasalau/open-application
