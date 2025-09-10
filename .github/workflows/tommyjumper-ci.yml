@@ -10,7 +10,7 @@ on:
 
 env:
   IMAGE_NAME: tomiwasalau01/tommyjumper
-  APP_NAME: tommyjumper
+  APP_NAME: tommyapps
   ARGOCD_NAMESPACE: argocd
   KUBECONFIG: kubeconfig
 
