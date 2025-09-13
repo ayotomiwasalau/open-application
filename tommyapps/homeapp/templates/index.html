@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Tommy's wall of vibecoded games{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <h1>Tommy's wall of vibecoded games</h1>
+    <p class="subtitle">Pick a vibe, click a card, start playing.</p>
+  </section>
+
+  <section class="card-grid">
+    <a class="card" href="{{ config.get('TOMMYJUMPER_URL', '#') }}" title="Play TommyJumper" target="_blank" rel="noopener noreferrer">
+      <div class="card-body">
+        <h3>TommyJumper</h3>
+        <p>Endless jumper. Climb higher, dodge enemies, set records.</p>
+      </div>
+    </a>
+
+    <a class="card disabled" href="#" title="Coming soon">
+      <div class="card-body">
+        <h3>Block Blitz</h3>
+        <p>Coming soon</p>
+      </div>
+    </a>
+
+    <a class="card disabled" href="#" title="Coming soon">
+      <div class="card-body">
+        <h3>Cosmic Runner</h3>
+        <p>Coming soon</p>
+      </div>
+    </a>
+  </section>
+{% endblock %} 

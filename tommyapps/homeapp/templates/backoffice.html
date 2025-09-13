@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Backoffice{% endblock %}
+
+{% block content %}
+  <section class="hero">
+    <h1>Backoffice</h1>
+    <p class="subtitle">Jump to your platform UIs</p>
+  </section>
+
+  <section class="card-grid">
+    <a class="card" href="{{ config.get('ARGOCD_URL', '#') }}" target="_blank" rel="noopener noreferrer">
+      <div class="card-body">
+        <h3>Argo CD</h3>
+        <p>GitOps for deployments</p>
+      </div>
+    </a>
+
+    <a class="card" href="{{ config.get('GRAFANA_URL', '#') }}" target="_blank" rel="noopener noreferrer">
+      <div class="card-body">
+        <h3>Grafana</h3>
+        <p>Dashboards & visualizations</p>
+      </div>
+    </a>
+
+    <a class="card" href="{{ config.get('JAEGER_URL', '#') }}" target="_blank" rel="noopener noreferrer">
+      <div class="card-body">
+        <h3>Jaeger</h3>
+        <p>Distributed tracing</p>
+      </div>
+    </a>
+
+    <a class="card" href="{{ config.get('LOKI_URL', '#') }}" target="_blank" rel="noopener noreferrer">
+      <div class="card-body">
+        <h3>Loki</h3>
+        <p>Logs aggregation</p>
+      </div>
+    </a>
+
+    <a class="card" href="{{ config.get('PROMETHEUS_URL', '#') }}" target="_blank" rel="noopener noreferrer">
+      <div class="card-body">
+        <h3>Prometheus</h3>
+        <p>Metrics & alerting</p>
+      </div>
+    </a>
+  </section>
+{% endblock %} 

@@ -59,3 +59,37 @@ database:
     host: "app-db"
     port: "5432"
 
+# Homeapp values
+homeapp:
+  service:
+    type: NodePort
+    port: 3113
+    targetPort: 3113
+  image:
+    repository: tomiwasalau01/homeapp
+    tag: latest
+    pullPolicy: Always
+  replicaCount: 1
+  ports:
+    containerPort: 3113
+    protocol: TCP
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 3113
+    initialDelaySeconds: 5
+    timeoutSeconds: 2
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 3113
+    initialDelaySeconds: 5
+    timeoutSeconds: 5
+  resources:
+    requests:
+      cpu: 250m
+      memory: 64Mi
+    limits:
+      memory: "128Mi"
+      cpu: "500m"
+
